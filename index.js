@@ -4,10 +4,10 @@ Linkedin = {
         actionDelay: 5000,
         nextPageDelay: 5000,
         // set to -1 for no limit
-        maxRequests: 20,
+        maxRequests: 40,
         totalRequestsSent: 0,
         // set to false to skip adding note in invites
-        addNote: false,
+        addNote: true,
         note: "Hey {{name}}, I'm looking forward to connecting with you!"
     },
     init: function (data, config) {
@@ -38,7 +38,7 @@ Linkedin = {
     compile: function (data, config) {
         var elements = document.querySelectorAll('button');
         data.pageButtons = [...elements].filter(function (element) {
-            return element.textContent.trim() === "connect";
+            return element.textContent.trim() === "Connect";
         });
         if (!data.pageButtons || data.pageButtons.length === 0) {
             console.warn("ERROR: no connect buttons found on page!");
@@ -50,7 +50,7 @@ Linkedin = {
             data.pageButtonIndex = 0;
             var names = document.getElementsByClassName("entity-result__title-text");
             names = [...names].filter(function (element) {
-                return element.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.textContent.includes("conectar\n");
+                return element.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.textContent.includes("Connect\n");
             });
             data.connectNames = [...names].map(function (element) {
                 return element.innerText.split(" ")[0];
